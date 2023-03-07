@@ -8,22 +8,37 @@ import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 
-@RestController
+// Übung 8
+//
+// 1 - Baue einene RestController.
+//
+
+// 2 - Annotiere die Klasse.
 public class FluxMonoController {
 
 
-    @GetMapping("/flux")
-    public Flux<Integer> flux(){
-        return Flux.just(1,2,3)
-                .log();
+
+    // 3 - Erstelle für die Methode flux() ein GetMapping für den Endpunkt /flux.
+
+    // 4 - Der Rückgabetyp ist ein Flux mit drei von dir gewählten Integern als Elementen.
+    public void flux(){
+
+        // 5 - Gib ein Flux mit drei Integern zurück.
+
     }
 
-    @GetMapping("/mono")
-    public Mono<String> helloWorldMono(){
-        return Mono.just("hello-world");
+    // 6 - Erstelle für die Methode flux() ein GetMapping für den Endpunkt /mono.
+
+    // 7 - Der Rückgabetyp ist ein Mono mit deiner Lieblingsprimzahl.
+    public void mono(){
+
+        // 8 - Gib ein Mono mit dem Integer zurück.
+
     }
 
-    @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    // 9 - Erstelle für die Methode stream() ein GetMapping für den Endpunkt /stream.
+    //     Vergiss dabei nicht produces = MediaType.TEXT_EVENT_STREAM_VALUE zum Mapping hinzuzufügen.
+
     public Flux<Long> stream(){
         return Flux.interval(Duration.ofSeconds(1))
                 .log();

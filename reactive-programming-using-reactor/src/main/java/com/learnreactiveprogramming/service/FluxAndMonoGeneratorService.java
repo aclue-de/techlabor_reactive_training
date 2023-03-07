@@ -11,115 +11,161 @@ import java.util.function.Function;
 
 public class FluxAndMonoGeneratorService {
 
-    public Flux<String> namesFlux() {
-        var namesList = List.of("alex", "ben", "chloe");
-        //return Flux.just("alex", "ben", "chloe");
-        return Flux.fromIterable(namesList); // coming from a db or remote service
+
+    // Übung 1
+    //
+    // 1 - Schreibe eine Methode, welche ein Flux mit den Namen der Superhelden Alex,
+    //     Rapha, Melina und Malte zurück gibt. Jeder Name soll von Typ String sein.
+    //
+    // 2 - Gib einen Rückgabetyp an.
+    //
+    public void superheldenFlux() {
+        // 3 - Erzeuge eine Liste mit den Namen
+
+        // 4 - Gib das Flux mit den Namen der Superhelden zurück.
 
     }
 
-    public Flux<String> namesFlux_immutablity() {
-        var namesList = List.of("alex", "ben", "chloe");
-        //return Flux.just("alex", "ben", "chloe");
+    // 5 - Gib einen Rückgabetyp an.
+    //
+    public void superheldenMono() {
+        // 6 - Gib das Mono mit einem Namen eines Superhelden deiner Wahl zurück.
+
+    }
+
+
+    // Übung 3
+    //
+    // 1 - Schreibe eine Methode, welche ein Flux mit den Namen der Superhelden Alex,
+    //     Rapha, Melina und Malte in upper case zurück gibt.
+    //
+    // 2 - Gib einen Rückgabetyp an.
+    //
+    public void superheldenFlux_map() {
+        // 3 - Erzeuge eine Liste mit den Namen
+
+        // 4 - Gib das Flux mit den Namen der Superhelden zurück
+        //     und mache gebrauch von map(). Nutze Type::toUpperCase
+        //     und ersetze Type mit dem Typen der Listenelemente
+
+        // 5 - Gehe in die Testklasse und schreibe einen Test superheldenFlux_map.
+    }
+
+    public Flux<String> superhelden_immutablity() {
+        var namesList = List.of("alex", "rapha", "melina", "malte");
+
         var namesFlux = Flux.fromIterable(namesList);
         namesFlux.map(String::toUpperCase);
         return namesFlux;
     }
 
 
-    public Flux<String> namesFlux_map(int stringLength) {
-        var namesList = List.of("alex", "ben", "chloe");
-        //return Flux.just("alex", "ben", "chloe");
+    // Übung 4
+    //
+    // 1 - Schreibe eine Methode, welche ein Flux mit den Namen der Superhelden Alex,
+    //     Rapha, Melina und Malte in upper case zurück gibt. Zusätzlich dürfen
+    //     jedoch ausschließlich Namen mit einer Zeichenlänge von 5 und größer zurück gegeben werden.
+    //
+    public Flux<String> superheldenFlux_map_filter() {
+        return Flux.just("alex", "rapha", "melina", "malte")
+                .map(String::toUpperCase);
 
-        //Flux.empty()
-        return Flux.fromIterable(namesList)
-                //.map(s -> s.toUpperCase())
-                .map(String::toUpperCase)
-                .delayElements(Duration.ofMillis(500))
-                .filter(s -> s.length() > stringLength)
-                .map(s -> s.length() + "-" + s)
-                .doOnNext(name -> {
-                    System.out.println("name is : " + name);
-                    name = name.toLowerCase();
-                })
-                .doOnSubscribe(s -> {
-                    System.out.println("Subscription  is : " + s);
-                })
-                .doOnComplete(() -> {
-                    System.out.println("Completed sending all the items.");
-                })
-                .doFinally((signalType) -> {
-                    System.out.println("value is : " + signalType);
-                })
-                .defaultIfEmpty("default");
-    }
+                // 2 - Verwende einen Filter
 
-    public Mono<String> namesMono() {
+                // 3 - Baue auch einen default ein, falls jeder Wert gefiltert wird.
 
-        return Mono.just("alex");
+                // 4 - Und weils so viel Spaß macht, gleich noch einen Test hinterher.
 
     }
 
-    public Mono<String> namesMono_map_filter(int stirngLength) {
+
+    public Mono<String> superheldenMono_map_filter() {
         return Mono.just("alex")
-                .map(String::toUpperCase)
-                .filter(s -> s.length() > stirngLength)
-                .defaultIfEmpty("default");
+                .map(String::toUpperCase);
+
+                // 2 - Verwende einen Filter
+
+                // 3 - Baue auch einen default ein, falls jeder Wert gefiltert wird.
 
     }
 
 
-    /**
-     * @param stringLength
-     */
-    public Flux<String> namesFlux_flatmap(int stringLength) {
-        var namesList = List.of("alex", "ben", "chloe"); // a, l, e , x
-        return Flux.fromIterable(namesList)
-                //.map(s -> s.toUpperCase())
-                .map(String::toUpperCase)
-                .filter(s -> s.length() > stringLength)
-                // ALEX,CHLOE -> A, L, E, X, C, H, L , O, E
-                .flatMap(this::splitString);
+    // Übung 5
+    //
+    // Wende den flatMap() Operator an.
+    //
+    private void splitString(String name) {
 
+        // 1 - Schreibe eine Methode, die einen String als
+        //     Übergabeparameter hat und Diesen mit string.split(““) trennt.
+
+        // 2 - Die Methode soll ein Flux vom Typ String zurück geben.
+        //     Mit Flux.fromArray(charArray) wird ein jeder Eintrag des Arrays vom Flux gepubslihed.
+        //     Das bedeutet: Array("BERT") -> Flux("B", "E", "R", "T")
+    }
+
+    public Flux<String> superheldenFlux_flatmap(int stringLength) {
+        var namesList = List.of("alex", "rapha", "melina", "malte");
+        return Flux.fromIterable(namesList)
+                .map(String::toUpperCase) // oder .map(s -> s.toUpperCase())
+                .filter(s -> s.length() > stringLength);
+
+                // 3 - Verwende .flatMap() und wende auf jedem Eintrag splitString(name) an.
+
+                // Wie wird das Ergebnis aussehen? ALEX,RAPHA -> A, L, E, X, R, A, P, H, A
 
     }
 
-    public Flux<String> namesFlux_flatmap_async(int stringLength) {
-        var namesList = List.of("alex", "ben", "chloe"); // a, l, e , x
+    // 4 - Async von flatMap()
+
+    private Flux<String> splitString_withDelay(String name) {
+        var delay = new Random().nextInt(1000);
+        var charArray = name.split("");
+        return Flux.fromArray(charArray)
+                .delayElements(Duration.ofMillis(delay));
+    }
+
+    // 5 - Was wird als Reihenfolge der Elemente vom Flux angenommen?
+
+    public Flux<String> superheldenFlux_flatmap_async(int stringLength) {
+        var namesList = List.of("alex", "rapha", "melina", "malte");
         return Flux.fromIterable(namesList)
-                //.map(s -> s.toUpperCase())
                 .map(String::toUpperCase)
                 .filter(s -> s.length() > stringLength)
                 .flatMap(this::splitString_withDelay);
 
-
     }
 
-    public Flux<String> namesFlux_concatmap(int stringLength) {
-        var namesList = List.of("alex", "ben", "chloe"); // a, l, e , x
+    // Übung 6
+    //
+    // 1 - Wende den concatMap() Operator an. Erweitere die Methode um
+    //     concatMap() und führe auf jedem Namen die Methode splitString_withDelay(x) aus.
+    //
+    public Flux<String> superheldenFlux_concatmap(int stringLength) {
+        var namesList = List.of("alex", "rapha", "melina", "malte");
         return Flux.fromIterable(namesList)
-                //.map(s -> s.toUpperCase())
                 .map(String::toUpperCase)
-                .filter(s -> s.length() > stringLength)
-                //.flatMap((name)-> splitString(name));
-                .concatMap(this::splitString_withDelay);
+                .filter(s -> s.length() > stringLength);
+
+                // 1 - Führe die Methode splitString_withDelay(x) mit dem concatMap() Operator aus.
+
+                // 2 -  Vervollständige den Test für diese Methode.
 
     }
 
-    public Mono<List<String>> namesMono_flatmap(int stringLength) {
+    // Übung 7
+    //
+    // 1 - Explore flatMap() mit Mono.
+    //
+    public Mono<List<String>> exploreMono_flatmap(int stringLength) {
         return Mono.just("alex")
                 .map(String::toUpperCase)
                 .filter(s -> s.length() > stringLength)
-                .flatMap(this::splitStringMono); //Mono<List of A, L, E  X>
+                .flatMap(this::splitStringMono);
     }
 
-    public Flux<String> namesMono_flatmapMany(int stringLength) {
-        return Mono.just("alex")
-                //.map(s -> s.toUpperCase())
-                .map(String::toUpperCase)
-                .flatMapMany(this::splitString_withDelay);
-    }
-
+    // 2 - splitStringMono(x) liefert als Rückgabe nun ein Mono mit Stringliste
+    //     anstatt einem Flux mit Strings bei splitStringFlux().
     private Mono<List<String>> splitStringMono(String s) {
         var charArray = s.split("");
         return Mono.just(List.of(charArray))
@@ -127,7 +173,16 @@ public class FluxAndMonoGeneratorService {
     }
 
 
-    public Flux<String> namesFlux_transform(int stringLength) {
+
+    public Flux<String> exploreMono_flatmapMany(int stringLength) {
+        return Mono.just("alex")
+                //.map(s -> s.toUpperCase())
+                .map(String::toUpperCase)
+                .flatMapMany(this::splitString_withDelay);
+    }
+
+
+    public Flux<String> exploreFlux_transform(int stringLength) {
 
         Function<Flux<String>, Flux<String>> filterMap = name -> name.map(String::toUpperCase)
                 .filter(s -> s.length() > stringLength);
@@ -135,62 +190,9 @@ public class FluxAndMonoGeneratorService {
         var namesList = List.of("alex", "ben", "chloe"); // a, l, e , x
         return Flux.fromIterable(namesList)
                 .transform(filterMap) // gives u the opportunity to combine multiple operations using a single call.
-                .flatMap(this::splitString)
                 .defaultIfEmpty("default");
-        //using "map" would give the return type as Flux<Flux<String>
-
     }
 
-
-    public Flux<String> namesFlux_transform_switchIfEmpty(int stringLength) {
-
-        Function<Flux<String>, Flux<String>> filterMap = name -> name.map(String::toUpperCase)
-                .filter(s -> s.length() > stringLength)
-                .flatMap(this::splitString);
-
-        var defaultFlux = Flux.just("default")
-                .transform(filterMap); //"D","E","F","A","U","L","T"
-
-        var namesList = List.of("alex", "ben", "chloe"); // a, l, e , x
-        return Flux.fromIterable(namesList)
-                .transform(filterMap) // gives u the opportunity to combine multiple operations using a single call.
-                .switchIfEmpty(defaultFlux);
-        //using "map" would give the return type as Flux<Flux<String>
-
-    }
-
-
-    public Flux<String> namesFlux_transform_concatwith(int stringLength) {
-        Function<Flux<String>, Flux<String>> filterMap = name -> name.map(String::toUpperCase)
-                .filter(s -> s.length() > stringLength)
-                .map(s -> s.length() + "-" + s);
-
-        var namesList = List.of("alex", "ben", "chloe"); // a, l, e , x
-        var flux1 = Flux.fromIterable(namesList)
-                .transform(filterMap);
-
-        var flux2 = flux1.concatWith(Flux.just("anna")
-                .transform(filterMap));
-
-        return flux2;
-
-    }
-
-    public Mono<String> name_defaultIfEmpty() {
-
-        return Mono.<String>empty() // db or rest call
-                .defaultIfEmpty("Default");
-
-    }
-
-
-    public Mono<String> name_switchIfEmpty() {
-
-        Mono<String> defaultMono = Mono.just("Default");
-        return Mono.<String>empty() // db or rest call
-                .switchIfEmpty(defaultMono);
-
-    }
 
     // "A", "B", "C", "D", "E", "F"
     public Flux<String> explore_concat() {
@@ -200,19 +202,6 @@ public class FluxAndMonoGeneratorService {
         var defFlux = Flux.just("D", "E", "F");
 
         return Flux.concat(abcFlux, defFlux);
-
-    }
-
-
-    // "A", "B", "C", "D", "E", "F"
-    public Flux<String> explore_concatWith() {
-
-        var abcFlux = Flux.just("A", "B", "C");
-
-        var defFlux = Flux.just("D", "E", "F");
-
-        return abcFlux.concatWith(defFlux).log();
-
 
     }
 
@@ -227,7 +216,6 @@ public class FluxAndMonoGeneratorService {
     }
 
     // "A", "D", "B", "E", "C", "F"
-    // Flux is subscribed early
     public Flux<String> explore_merge() {
 
         var abcFlux = Flux.just("A", "B", "C")
@@ -238,37 +226,19 @@ public class FluxAndMonoGeneratorService {
 
         return Flux.merge(abcFlux, defFlux).log();
 
-
-    }
-
-    // "A", "D", "B", "E", "C", "F"
-    // Flux is subscribed early
-    public Flux<String> explore_mergeWith() {
-
-        var abcFlux = Flux.just("A", "B", "C")
-                .delayElements(Duration.ofMillis(100));
-
-        var defFlux = Flux.just("D", "E", "F")
-                .delayElements(Duration.ofMillis(125));
-
-        return abcFlux.mergeWith(defFlux).log();
-
-
     }
 
     public Flux<String> explore_mergeWith_mono() {
 
         var aMono = Mono.just("A");
 
-        var bMono = Flux.just("B");
+        var bMono = Flux.just("B", "C");
 
         return aMono.mergeWith(bMono);
-
 
     }
 
     // "A","B","C","D","E","F"
-    // Flux is subscribed early
     public Flux<String> explore_mergeSequential() {
 
         var abcFlux = Flux.just("A", "B", "C")
@@ -304,14 +274,12 @@ public class FluxAndMonoGeneratorService {
         return Flux.zip(abcFlux, defFlux, flux3, flux4)
                 .map(t4 -> t4.getT1() + t4.getT2() + t4.getT3() + t4.getT4());
 
-
     }
 
     public Flux<String> explore_zip_2() {
 
         var aMono = Mono.just("A");
         var bMono = Mono.just("B");
-
 
         return Flux.zip(aMono, bMono, (first, second) -> first + second);
 
@@ -341,37 +309,20 @@ public class FluxAndMonoGeneratorService {
 
     }
 
-    /***
-     * ALEX -> FLux(A,L,E,X)
-     * @param name
-     * @return
-     */
-    private Flux<String> splitString(String name) {
-        var charArray = name.split("");
-        return Flux.fromArray(charArray);
-    }
-
-    private Flux<String> splitString_withDelay(String name) {
-        var delay = new Random().nextInt(1000);
-        var charArray = name.split("");
-        return Flux.fromArray(charArray)
-                .delayElements(Duration.ofMillis(delay));
-    }
 
     public static void main(String[] args) {
 
         FluxAndMonoGeneratorService fluxAndMonoGeneratorService = new FluxAndMonoGeneratorService();
 
-        Flux<String> namesFlux = fluxAndMonoGeneratorService.namesFlux().log();
+        Flux<String> namesFlux = fluxAndMonoGeneratorService.splitString_withDelay("").log();
 
-        namesFlux.subscribe((name) -> {
-            System.out.println("Name is : " + name);
+        namesFlux.subscribe((x) -> {
+            System.out.println("Name is : " + x);
         });
 
-        Mono<String> namesMono = fluxAndMonoGeneratorService.namesMono().log();
+        Flux<String> xxxFlux = fluxAndMonoGeneratorService.splitString_withDelay("").log();
 
-        namesMono.subscribe((name) -> {
-            System.out.println("Name is : " + name);
-        });
+        xxxFlux.subscribe(x -> System.out.println("Flux: " + x));
+
     }
 }
