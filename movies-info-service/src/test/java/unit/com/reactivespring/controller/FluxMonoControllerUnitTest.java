@@ -15,97 +15,47 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @WebFluxTest(controllers = FluxMonoController.class)
 public class FluxMonoControllerUnitTest {
 
-    @Autowired
-    WebTestClient webTestClient;
+    // Übung 9
+    //
+    // 1 - Baue die folgenden Testmethoden.
+    //
 
-    @MockBean
-    private MoviesInfoService moviesInfoServiceMock;
+    // 2 - Binde den WebTestClient mit Hilfe  von dependency injection ein.
+
 
     @Test
     void flux() {
 
-        webTestClient
-                .get()
-                .uri("/flux")
-                .exchange()
-                .expectStatus()
-                .is2xxSuccessful()
-                .expectBodyList(Integer.class)
-                .hasSize(3);
+                // 3 - Nutze den Webtest
+                // 3 - Führe einen get-request aus.
+                // 4 - Füge den Endpunkt den du Ansprechen möchtest hinzu --> Tipp .uri(x).
+                // 5 - .exchange() Performt den Austausch.
+                // 6 - Ist der Responsestatus im 2xx Bereiech?
+                // 7 - Das Flux enthält drei Elemente!
     }
 
     @Test
     void flux_approach2() {
 
-        var flux = webTestClient
-                .get()
-                .uri("/flux")
-                .exchange()
-                .expectStatus()
-                .is2xxSuccessful()
-                .returnResult(Integer.class)
-                .getResponseBody();
+        // 8 - Kopiere den Inhalt aus der flux() Testmethode und weise sie einer lokalen Variable flux zu.
 
-        StepVerifier.create(flux)
-                .expectNext(1, 2, 3)
-                .expectComplete();
-    }
+        // 9 - Nutze Stepverifier.create(flux).
 
-    @Test
-    void flux_approach3() {
+        //10 - Was erwartest du als Element?
 
-        webTestClient
-                .get()
-                .uri("/flux")
-                .exchange()
-                .expectStatus()
-                .is2xxSuccessful()
-                .expectBodyList(Integer.class)
-                .consumeWith(listEntityExchangeResult -> {
-                    var responseBody = listEntityExchangeResult.getResponseBody();
-                    assert (responseBody != null ? responseBody.size() : 0) ==3;
-                });
-
+        //11 - Hast du dran gedacht zu prüfen, ob onComplete() aufgerufen wurde?
 
     }
 
-
-    /**
-     * Copied from approach 2
-     */
     @Test
     void stream() {
 
-        var flux = webTestClient
-                .get()
-                .uri("/stream")
-                .exchange()
-                .expectStatus()
-                .is2xxSuccessful()
-                .returnResult(Integer.class)
-                .getResponseBody();
+        // 12 - Füge den gleichen Inhalt bezogen auf den WebTestClient aus flux_approach2() ein. Kommentiere folgendes ein.
+        // .returnResult(Integer.class)
+        // .getResponseBody()
 
-        StepVerifier.create(flux)
-                .expectNext(0, 1, 2)
-                .thenCancel()
-                .verify();
-    }
-
-
-    @Test
-    void mono() {
-
-         webTestClient
-                .get()
-                .uri("/mono")
-                .exchange()
-                .expectStatus()
-                .is2xxSuccessful()
-                .expectBody(String.class)
-                .consumeWith(stringEntityExchangeResult ->{
-                    var response = stringEntityExchangeResult.getResponseBody();
-                    assertEquals("hello-world", response);
-                });
+        // 13 - Auch hier kann der Stepverifier genutzt werden.
 
     }
+
 }

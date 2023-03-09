@@ -20,7 +20,7 @@ public class FluxMonoController {
 
     // 3 - Erstelle für die Methode flux() ein GetMapping für den Endpunkt /flux.
 
-    // 4 - Der Rückgabetyp ist ein Flux mit drei von dir gewählten Integern als Elementen.
+    // 4 - Der Rückgabetyp ist ein Flux mit drei Integern 1, 2, 3 als Elementen.
     public void flux(){
 
         // 5 - Gib ein Flux mit drei Integern zurück.
@@ -29,7 +29,7 @@ public class FluxMonoController {
 
     // 6 - Erstelle für die Methode flux() ein GetMapping für den Endpunkt /mono.
 
-    // 7 - Der Rückgabetyp ist ein Mono mit deiner Lieblingsprimzahl.
+    // 7 - Der Rückgabetyp ist ein Mono mit einem Element von Typ long.
     public void mono(){
 
         // 8 - Gib ein Mono mit dem Integer zurück.

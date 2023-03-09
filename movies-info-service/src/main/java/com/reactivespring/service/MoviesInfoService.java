@@ -40,17 +40,17 @@ public class MoviesInfoService {
         return movieInfoRepository.findById(id);
     }
 
+    // Übung 10
+    //
+    // 1 - Baue ein updateMovieInfo Methode.
+
     public Mono<MovieInfo> updateMovieInfo(MovieInfo movieInfo, String id) {
-        return movieInfoRepository.findById(id)
-                .flatMap(movieInfo1 -> {
-                    movieInfo1.setCast(movieInfo.getCast());
-                    movieInfo1.setName(movieInfo.getName());
-                    movieInfo1.setRelease_date(movieInfo.getRelease_date());
-                    movieInfo1.setYear(movieInfo.getYear());
-                    return movieInfoRepository.save(movieInfo1);
-                });
+        // 1 - Suche die MovieInfo mit Hilfe der id im movieInfoRepository.
 
+                // 2 - Nutze flatMap um alle Felder des Objektes zu aktualisieren.
 
+                    // 2 - Speichere das aktualisierte Objekt.
+                    return Mono.just(new MovieInfo());
     }
 
     public Mono<Void> deleteMovieInfoById(String id) {
