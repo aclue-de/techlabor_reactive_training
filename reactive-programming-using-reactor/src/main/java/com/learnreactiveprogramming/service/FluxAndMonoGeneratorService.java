@@ -326,20 +326,4 @@ public class FluxAndMonoGeneratorService {
 
     }
 
-    public static void main(String[] args) {
-
-        FluxAndMonoGeneratorService fluxAndMonoGeneratorService = new FluxAndMonoGeneratorService();
-
-        Flux<String> namesFlux = fluxAndMonoGeneratorService.namesFlux().log();
-
-        namesFlux.subscribe((name) -> {
-            System.out.println("Name is : " + name);
-        });
-
-        Mono<String> namesMono = fluxAndMonoGeneratorService.namesMono().log();
-
-        namesMono.subscribe((name) -> {
-            System.out.println("Name is : " + name);
-        });
-    }
 }

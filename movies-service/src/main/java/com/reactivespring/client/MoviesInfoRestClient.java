@@ -87,33 +87,6 @@ public class MoviesInfoRestClient {
 
     }
 
-    public Flux<MovieInfo> retrieveMovieInfoStream() {
-
-        var url = moviesInfoUrl.concat("/stream");
-        /*var retrySpec = RetrySpec.fixedDelay(3, Duration.ofSeconds(1))
-                .filter((ex) -> ex instanceof MoviesInfoServerException)
-                .onRetryExhaustedThrow(((retryBackoffSpec, retrySignal) -> Exceptions.propagate(retrySignal.failure())));*/
-
-        return webClient.get()
-                .uri(url)
-                .retrieve()
-                .onStatus(HttpStatus::is4xxClientError, (clientResponse -> {
-                    log.info("Status code : {}", clientResponse.statusCode().value());
-                    return clientResponse.bodyToMono(String.class)
-                            .flatMap(response -> Mono.error(new MoviesInfoClientException(response, clientResponse.statusCode().value())));
-                }))
-                .onStatus(HttpStatus::is5xxServerError, (clientResponse -> {
-                    log.info("Status code : {}", clientResponse.statusCode().value());
-                    return clientResponse.bodyToMono(String.class)
-                            .flatMap(response -> Mono.error(new MoviesInfoServerException(response)));
-                }))
-                .bodyToFlux(MovieInfo.class)
-                //.retry(3)
-                .retryWhen(RetryUtil.retrySpec())
-                .log();
-
-    }
-
     public Mono<MovieInfo> retrieveMovieInfo_exchange(String movieId) {
 
         var url = moviesInfoUrl.concat("/{id}");
