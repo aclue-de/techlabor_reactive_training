@@ -1,5 +1,6 @@
-package com.reactivespring.controller.uebung89;
+package com.reactivespring.controller.uebung9;
 
+import com.reactivespring.controller.uebung8.FluxMonoController;
 import com.reactivespring.service.MoviesInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;

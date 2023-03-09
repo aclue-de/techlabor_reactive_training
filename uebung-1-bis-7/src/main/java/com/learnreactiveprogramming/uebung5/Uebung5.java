@@ -18,7 +18,7 @@ public class Uebung5 {
         //     Übergabeparameter hat und Diesen mit string.split(““) trennt.
 
         // 2 - Die Methode soll ein Flux vom Typ String zurück geben.
-        //     Mit Flux.fromArray(charArray) wird ein jeder Eintrag des Arrays vom Flux gepubslihed.
+        //     Flux.fromArray(charArray)
         //     Das bedeutet: Array("BERT") -> Flux("B", "E", "R", "T")
     }
 

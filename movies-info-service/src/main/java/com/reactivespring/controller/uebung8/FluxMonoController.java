@@ -1,4 +1,4 @@
-package com.reactivespring.controller.uebung89;
+package com.reactivespring.controller.uebung8;
 
 import reactor.core.publisher.Flux;
 

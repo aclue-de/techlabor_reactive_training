@@ -14,12 +14,11 @@ public class Uebung3 {
 
         // 4 - Gib das Flux mit den Namen der Superhelden zurück
         //     und mache gebrauch von map(). Nutze Type::toUpperCase
-        //     und ersetze Type mit dem Typen der Listenelemente
 
         // 5 - Gehe in die Testklasse und schreibe einen Test superheldenFlux_map.
     }
 
-    // 7 - Start
+    // 6 - Start
     public static void main(String[] args) {
 
         Uebung3 uebung3 = new Uebung3();

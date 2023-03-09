@@ -10,7 +10,7 @@ public class Uebung1 {
     // 2 - Gib einen Rückgabetyp an.
     //
     public void superheldenFlux() {
-        // 3 - Erzeuge eine Liste mit den Namen
+        // 3 - Erzeuge eine Liste mit den Namen.
 
         // 4 - Gib das Flux mit den Namen der Superhelden zurück.
 
