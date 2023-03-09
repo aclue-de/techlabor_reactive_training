@@ -1,42 +1,45 @@
 package com.learnreactiveprogramming.uebung2;
 
+import org.junit.jupiter.api.Test;
 
 public class Uebung2 {
+
+    Uebung2 uebung2 = new Uebung2();
 
 
     // Übung 2
     //
-
-    /*
-
+    // 1 - Schreibe eine Testmethode, welche prüft, ob das Flux die Namen der Superhelden Alex,
+    //     Rapha, Melina und Malte zurück gibt.
+    //
     @Test
-    void namesFlux() {
+    void superheldenFlux() {
 
         //given
 
         //when
-        var stringFlux = uebung1.superheldenFlux();
+
+        // 3 - Rufe die Methode mit deinem Service auf (siehe oben).
 
         //then
-        StepVerifier.create(stringFlux)
-                //.expectNextCount(3)
-                .expectNext("alex")
-                .expectNextCount(2)
-                .verifyComplete();
+
+        // 4 - Nutze den Step Verifier um das Flux zu testen.
 
     }
 
+    // 5 - Benenne die Methode.
     @Test
-    void namesMono() {
+    void superheldenMono() {
 
         //given
+
         //when
-        var stringMono = fluxAndMonoGeneratorService.namesMono();
+
+        // 6 - Rufe die Methode mit deinem Service auf.
 
         //then
-        StepVerifier.create(stringMono)
-                .expectNext("alex")
-                .verifyComplete();
 
-    }*/
+        // 7 - Nutze den Step Verifier um das Flux zu testen.
+
+    }
 }

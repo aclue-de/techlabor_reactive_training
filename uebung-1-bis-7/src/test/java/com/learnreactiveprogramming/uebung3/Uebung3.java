@@ -1,26 +1,27 @@
 package com.learnreactiveprogramming.uebung3;
 
+import org.junit.jupiter.api.Test;
 
 public class Uebung3 {
 
+    Uebung3 uebung3 = new Uebung3();
 
     // Übung 3
     //
-
-
-/*    @Test
-    void namesFlux_map() {
-
+    // 1 - Schreibe eine Testmethode, welche prüft, ob das Flux die Namen der Superhelden Alex,
+    //     Rapha, Melina und Malte in Großbuchstaben zurück gibt.
+    //
+    @Test
+    void superheldenFlux_map() {
         //given
-        int stringLength = 3;
 
         //when
-        var namesFlux = fluxAndMonoGeneratorService.namesFlux_map(stringLength).log();
+
+        // 2 - Rufe die Methode mit deinem Service auf.
 
         //then
-        StepVerifier.create(namesFlux)
-                .expectNext("4-ALEX", "5-RAPHA")
-                .verifyComplete();
 
-    }*/
+        // 3 - Nutze den Step Verifier um das Flux zu testen.
+
+    }
 }
