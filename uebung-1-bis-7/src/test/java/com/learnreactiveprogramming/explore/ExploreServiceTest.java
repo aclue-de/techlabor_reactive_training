@@ -10,7 +10,7 @@ class ExploreServiceTest {
 
     // Übung 7
     //
-    // 1 - Explore faltMap() auf Mono.
+    // 1 - Explore faltMap() auf Mono und andere Methoden.
     //
     @Test
     void exploreMono_flatmap() {
