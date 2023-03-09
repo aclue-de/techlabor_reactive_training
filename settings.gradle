@@ -2,5 +2,6 @@ rootProject.name = 'reactive-spring-webflux'
 include 'movies-review-service'
 include 'movies-service'
 include 'movies-info-service'
-include 'reactive-programming-using-reactor'
+include 'uebung-1-bis-7'
+include 'loesung-1-bis-10'
 

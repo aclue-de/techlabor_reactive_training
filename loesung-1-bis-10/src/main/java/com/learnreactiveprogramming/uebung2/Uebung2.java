@@ -26,7 +26,7 @@ public class Uebung2 {
     // 7 - Start
     public static void main(String[] args) {
 
-        Uebung2 uebung2 = new Uebung2();
+        Uebung2 uebung1 = new Uebung2();
 
 
     }
