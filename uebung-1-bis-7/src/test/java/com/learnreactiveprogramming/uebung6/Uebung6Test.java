@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 public class Uebung6Test {
 
-    Uebung6Test uebung6 = new Uebung6Test();
+    Uebung6 uebung6 = new Uebung6();
 
 
     // Übung 6
