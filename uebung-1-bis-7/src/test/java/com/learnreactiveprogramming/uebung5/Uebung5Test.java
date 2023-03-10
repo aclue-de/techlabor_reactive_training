@@ -2,9 +2,9 @@ package com.learnreactiveprogramming.uebung5;
 
 import org.junit.jupiter.api.Test;
 
-public class Uebung5 {
+public class Uebung5Test {
 
-    Uebung5 uebung5 = new Uebung5();
+    Uebung5Test uebung5 = new Uebung5Test();
 
 
     // Übung 5

@@ -9,6 +9,8 @@ public class Uebung2 {
     //
     // 2 - Gib einen Rückgabetyp an.
     //
+
+
     public void superheldenFlux() {
         // 3 - Erzeuge eine Liste mit den Namen
 
